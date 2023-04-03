@@ -11,8 +11,8 @@
                     <ul class="nk-block-tools g-3">
                         @isset($botao)
                         <li class="nk-block-tools-opt">
-                            <a href="#" class="btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
-                            <a href="#" class="btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>{{ $texto }}</span></a>
+                            <a href="#" class="btn btn-icon btn-primary d-md-none"><em class="icon ni ni-{{ $botao['icone'] }}"></em></a>
+                            <a href="{{ route($botao['rota']) }}" class="btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-{{  $botao['icone'] }}"></em><span>{{ $botao['texto'] }}</span></a>
                         </li>
                         @endisset
                     </ul>

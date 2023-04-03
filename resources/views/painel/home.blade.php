@@ -2,9 +2,7 @@
 @section('titulo')
     @include('painel.componentes.header-content',[
         'titulo'=> 'Painel',
-        'botao'=> true, 
-        'texto'=> 'Novo Painel',
-        'rota' => 'nome'
+        //'botao'=> ['texto'=> 'Novo Funcionário','icone'=>'plus','rota'=> 'funcionario.create']
     ])
 @endsection
 @section('main')

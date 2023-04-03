@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\ReservasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
 Route::get('/', function () {
     return view('painel.home');
 });
+Route::resource('/funcionarios',FuncionarioController::class);
+Route::resource('/reservas',ReservasController::class);
 
 Route::middleware([
     'auth:sanctum',

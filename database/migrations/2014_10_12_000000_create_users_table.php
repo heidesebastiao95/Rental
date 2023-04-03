@@ -22,9 +22,10 @@ return new class extends Migration
             $table->string('bi');
             $table->enum('sexo',['M','F']);
             $table->date('nascimento');
-            $table->enum('role',['admin','cliente']);
+            $table->enum('role',['admin','cliente','funcionario'])->default('cliente');
+            $table->string('carta_conducao')->nullable();
             $table->string('endereco');
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('foto', 2048)->nullable();
             $table->timestamps();
         });
     }

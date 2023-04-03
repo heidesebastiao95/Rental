@@ -15,14 +15,14 @@
         <div class="nk-sidebar-content">
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
-                    <li class="nk-menu-item active">
+                    <li class="nk-menu-item">
                         <a href="html/ecommerce/index.html" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-home-fill"></em></span>
                             <span class="nk-menu-text">Home</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a href="html/ecommerce/orders.html" class="nk-menu-link">
+                    <li class="nk-menu-item {{ Route::is('funcionarios.index')? 'active':'' }}">
+                        <a href="{{ route('funcionarios.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user-fill"></em></span>
                             <span class="nk-menu-text">Funcionarios</span>
                         </a>
