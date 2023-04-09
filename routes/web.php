@@ -24,8 +24,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
+    Route::get('/',function(){
+        return "Navega em 127.0.0.1/painel";
+    });
     
-    Route::get('/', function () {
+    Route::get('/painel', function () {
         return view('painel.home');
     })->name('painel');
     Route::resource('/funcionarios',FuncionarioController::class);

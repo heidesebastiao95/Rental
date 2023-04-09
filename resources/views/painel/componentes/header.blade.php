@@ -27,9 +27,9 @@
                         <div class="dropdown-menu dropdown-menu-md dropdown-menu-end">
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
-                                    <div class="user-avatar">
+                                    {{-- <div class="user-avatar">
                                         <span>U</span>
-                                    </div>
+                                    </div> --}}
                                     <div class="user-info">
                                         {{-- <span class="lead-text">Abu Bin Ishtiyak</span> --}}
                                         <span class="sub-text">{{ Auth::user()->email }}</span>
@@ -38,17 +38,21 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    {{-- <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
                                     <li><a href="html/user-profile-setting.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                    <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                                    <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li> --}}
                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                 </ul>
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <li><a href="#" onclick="event.preventDefault(); this.closest('form').submit();"><em class="icon ni ni-signout"></em><span>Log out</span></a></li>
+                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                        @csrf
+                                    <li>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            <em class="icon ni ni-signout"></em><span>Log out</span>
+                                        </a>
+                                    </li>
                                     </form>
 
                                 </ul>

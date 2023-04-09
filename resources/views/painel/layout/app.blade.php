@@ -8,7 +8,7 @@
         <!-- Fav Icon  -->
         <link rel="shortcut icon" href="./images/favicon.png">
         <!-- Page Title  -->
-        <title>Blank - Layout | DashLite Admin Template</title>
+        <title>Rental</title>
         <!-- StyleSheets  -->
         <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css?ver=3.1.2') }}">
         <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css?ver=3.1.2') }}">
