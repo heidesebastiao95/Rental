@@ -1,8 +1,9 @@
 @extends('painel.layout.app')
 @section('titulo')
     @include('painel.componentes.header-content',[
-        'titulo'=> 'Painel',
-        //'botao'=> ['texto'=> 'Novo Funcionário','icone'=>'plus','rota'=> 'funcionario.create']
+        'titulo'=> 'Reservas',
+        'botao'=> ['texto'=> 'Nova Reserva','icone'=>'plus','rota'=> 'reservas.create'],
+        'data_target' => ['form'=> 'addReserva'],
     ])
 @endsection
 @section('main')
@@ -18,80 +19,135 @@
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Data</span></th>
                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Estado</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
+                            Ação
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="nk-tb-item">
+                   @isset($reservas)
+                       @foreach ($reservas as $reserva)
+                       <tr class="nk-tb-item">
                         <td class="nk-tb-col">
                             <div class="user-card">
                                 <div class="user-avatar bg-dim-primary d-none d-sm-flex">
                                     <span>AB</span>
                                 </div>
                                 <div class="user-info">
-                                    <span class="tb-lead">Abu Bin Ishtiyak <span class="dot dot-success d-md-none ms-1"></span></span>
-                                    <span>info@softnio.com</span>
+                                    <span class="tb-lead">{{ $reserva->cliente->name }} <span class="dot dot-success d-md-none ms-1"></span></span>
+                                    <span>{{ $reserva->cliente->email }}</span>
                                 </div>
                             </div>
                         </td>
                         <td class="nk-tb-col tb-col-mb" data-order="35040.34">
-                            <span class="tb-amount">35040.34 <span class="currency">USD</span></span>
+                            <span class="tb-amount">{{ $reserva->carro->marca }} <span class="currency"></span></span>
                         </td>
                         <td class="nk-tb-col tb-col-md">
-                            <span>+811 847-4958</span>
+                            <span class="tb-lead">{{ $reserva->partida }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
-                            <ul class="list-status">
-                                <li><em class="icon text-success ni ni-check-circle"></em> <span>Email</span></li>
-                                <li><em class="icon ni ni-alert-circle"></em> <span>KYC</span></li>
-                            </ul>
+                            <span class="tb-lead">{{ $reserva->destino }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-lg">
-                            <span>05 Oct 2019</span>
+                            <span class="tb-lead">{{ $reserva->created_at }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-md">
-                            <span class="tb-status text-success">Active</span>
+                            @switch($reserva->estado)
+                                @case('pendente')
+                                <span class="badge tb-status text-white bg-warning ">Pendente</span>
+                                    @break
+                                @case('confirmado')
+                                <span class="badge tb-status text-white bg-success ">Confirmado</span>
+                                    @break
+                                @case('cancelado')
+                                <span class="badge tb-status text-white bg-danger ">Cancelado</span>
+                                    @break
+                                @default
+                                    
+                            @endswitch
                         </td>
                         <td class="nk-tb-col nk-tb-col-tools">
                             <ul class="nk-tb-actions gx-1">
                                 <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
-                                        <em class="icon ni ni-wallet-fill"></em>
-                                    </a>
+                                    <form action="{{ route('reservas.destroy',$reserva->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
+                                            <em class="icon ni ni-trash-fill"></em>
+                                        </a>
+                                    </form>
                                 </li>
                                 <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                        <em class="icon ni ni-mail-fill"></em>
+                                    <a href="{{ route('reservas.edit',$reserva->id) }}" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                        <em class="icon ni ni-pen-fill"></em>
                                     </a>
-                                </li>
-                                <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirmar">
-                                        <em class="icon ni ni-user-cross-fill"></em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="drodown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick View</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-repeat"></em><span>Transaction</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#"><em class="icon ni ni-shield-star"></em><span>Reset Pass</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset 2FA</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-na"></em><span>Suspend User</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </li>
                             </ul>
                         </td>
                     </tr><!-- .nk-tb-item  -->
+                       @endforeach
+                   @endisset
                     
                 </tbody>
             </table>
         </div>
     </div><!-- .card-preview -->
+
+    <div class="nk-add-product toggle-slide toggle-slide-right" data-content="addReserva" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+        <form method="POST" action="{{ route('reservas.store') }}">
+            @csrf
+        <div class="nk-block-head">
+            <div class="nk-block-head-content">
+                <h5 class="nk-block-title">Novo Carro</h5>
+            </div>
+        </div><!-- .nk-block-head -->
+        <div class="nk-block">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-label" for="product-title">Partida</label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="partida" class="form-control" id="product-title">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-mb-6">
+                    <div class="form-group">
+                        <label class="form-label" for="sale-price">Destino</label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="destino" class="form-control" id="sale-price">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cliente</label>
+                    <div class="form-control-wrap">
+                        <select name="user_id" class="form-select js-select2" data-search="on">
+                            @isset($clientes)
+                                @foreach ($clientes as $cliente)
+                                <option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Carro</label>
+                    <div class="form-control-wrap">
+                        <select name="carro_id" class="form-select js-select2" data-search="on">
+                            @isset($carros)
+                                @foreach ($carros as $carro)
+                                <option value="{{ $carro->id }}">{{ $carro->marca }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Salvar</span></button>
+                </div>
+                
+            </div>
+        </div><!-- .nk-block -->
+    </form>
+    </div>
 @endsection

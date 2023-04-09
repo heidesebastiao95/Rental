@@ -2,7 +2,8 @@
 @section('titulo')
     @include('painel.componentes.header-content',[
         'titulo'=> 'Painel',
-        //'botao'=> ['texto'=> 'Novo Funcionário','icone'=>'plus','rota'=> 'funcionario.create']
+        'botao'=> ['texto'=> 'Nova Categoria','icone'=>'plus','rota'=> 'funcionario.create'],
+        'data_target' => ['form'=> 'addProduct']
     ])
 @endsection
 @section('main')
@@ -11,87 +12,105 @@
             <table class="datatable-init-export nowrap table  nk-tb-list nk-tb-ulist" data-auto-responsive="false" data-export-title="Export">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">Cliente</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Carro</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Partida</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Destino</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Data</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Estado</span></th>
+                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Nome</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Portas</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Passageiros</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Descrição</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
+                            Ação
                         </th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($categorias as $categoria)
                     <tr class="nk-tb-item">
-                        <td class="nk-tb-col">
-                            <div class="user-card">
-                                <div class="user-avatar bg-dim-primary d-none d-sm-flex">
-                                    <span>AB</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="tb-lead">Abu Bin Ishtiyak <span class="dot dot-success d-md-none ms-1"></span></span>
-                                    <span>info@softnio.com</span>
-                                </div>
-                            </div>
-                        </td>
                         <td class="nk-tb-col tb-col-mb" data-order="35040.34">
-                            <span class="tb-amount">35040.34 <span class="currency">USD</span></span>
+                            <span class="tb-amount">{{ $categoria->nome }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-md">
-                            <span>+811 847-4958</span>
+                            <span>{{ $categoria->n_portas }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
-                            <ul class="list-status">
-                                <li><em class="icon text-success ni ni-check-circle"></em> <span>Email</span></li>
-                                <li><em class="icon ni ni-alert-circle"></em> <span>KYC</span></li>
-                            </ul>
+                            <span>{{ $categoria->n_passageiros }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-lg">
-                            <span>05 Oct 2019</span>
-                        </td>
-                        <td class="nk-tb-col tb-col-md">
-                            <span class="tb-status text-success">Active</span>
+                            <span>{{ $categoria->descricao }}</span>
                         </td>
                         <td class="nk-tb-col nk-tb-col-tools">
                             <ul class="nk-tb-actions gx-1">
                                 <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
-                                        <em class="icon ni ni-wallet-fill"></em>
-                                    </a>
+                                    <form method="POST" action="{{ route('categorias.destroy',$categoria->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
+                                            <em class="icon ni ni-trash"></em>
+                                        </button>
+                                    </form>
                                 </li>
                                 <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                        <em class="icon ni ni-mail-fill"></em>
+                                    <a href="{{ route('categorias.edit',$categoria->id) }}" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                        <em class="icon ni ni-pen"></em>
                                     </a>
-                                </li>
-                                <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirmar">
-                                        <em class="icon ni ni-user-cross-fill"></em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="drodown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick View</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-repeat"></em><span>Transaction</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#"><em class="icon ni ni-shield-star"></em><span>Reset Pass</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset 2FA</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-na"></em><span>Suspend User</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </li>
                             </ul>
                         </td>
                     </tr><!-- .nk-tb-item  -->
-                    
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div><!-- .card-preview -->
+
+    <div class="nk-add-product toggle-slide toggle-slide-right" data-content="addProduct" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+        <form method="POST" action="{{ route('categorias.store') }}">
+            @csrf
+        <div class="nk-block-head">
+            <div class="nk-block-head-content">
+                <h5 class="nk-block-title">Nova Categoria</h5>
+            </div>
+        </div><!-- .nk-block-head -->
+        <div class="nk-block">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-label" for="product-title">Nome</label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="nome" class="form-control" id="product-title">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-mb-6">
+                    <div class="form-group">
+                        <label class="form-label" for="sale-price">Nª Portas</label>
+                        <div class="form-control-wrap">
+                            <input type="number" name="n_portas" class="form-control" id="sale-price">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-mb-6">
+                    <div class="form-group">
+                        <label class="form-label" for="sale-price">Nª Passageiros</label>
+                        <div class="form-control-wrap">
+                            <input type="number" name="n_passageiros" class="form-control" id="sale-price">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-mb-6">
+                    <div class="form-group">
+                            <label class="form-label" for="regular-price">Descrição</label>
+                            <div class="form-control-wrap">
+                                <textarea name="descricao" class="form-control no-resize" id="default-textarea"></textarea>
+                            </div>
+                        </div>
+                </div>
+                
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Salvar</span></button>
+                </div>
+                
+            </div>
+        </div><!-- .nk-block -->
+    </form>
+    </div>
 @endsection

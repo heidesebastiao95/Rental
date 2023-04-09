@@ -1,15 +1,15 @@
 @extends('painel.layout.app')
 @section('titulo')
     @include('painel.componentes.header-content',[
-        'botao'=> ['texto'=> 'Voltar','icone'=>'arrow-left','rota'=> 'funcionarios.index'],
-        'titulo'=> 'Adicionar Funcionario',
+        'botao'=> ['texto'=> 'Voltar','icone'=>'arrow-left','rota'=> 'clientes.index'],
+        'titulo'=> 'Adicionar Cliente',
     ])
 @endsection
 @section('main')
 <div class="nk-block nk-block-lg">
     <div class="card">
         <div class="card-inner">
-            <form method="POST" action="{{ route('funcionarios.store') }}" enctype="multipart/form-data" class="form-validate">
+            <form method="POST" action="{{ route('clientes.store') }}" enctype="multipart/form-data" class="form-validate">
                 @csrf
                 <div class="row g-gs">
                     <div class="col-md-6">

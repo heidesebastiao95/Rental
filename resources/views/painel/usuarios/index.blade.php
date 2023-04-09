@@ -18,9 +18,14 @@
                                 <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
-                                        <li><a href="{{ route('funcionarios.edit',$funcionario->id) }}"><em class="icon ni ni-focus"></em><span>Editar</span></a></li>
+                                        <li><a href="{{ route('funcionarios.edit',$funcionario->id) }}"><em class="icon ni ni-pen"></em><span>Editar</span></a></li>
                                         <li><a href="{{ route('funcionarios.show',$funcionario->id) }}"><em class="icon ni ni-eye"></em><span>Ver Detalhes</span></a></li>
-                                        <form action="{{ route('funcionarios.destroy',$funcionario->id) }}" method="delete"><li><a href="{{ route('funcionarios.destroy',$funcionario->id) }}"><em class="icon ni ni-mail"></em><span>Eliminar</span></a></li></form>
+                                        <form action="{{ route('funcionarios.destroy', $funcionario->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <li><a href="#" onclick="event.preventDefault(); this.closest('form').submit();"><em class="icon ni ni-trash"></em><span>Eliminar</span></a></li>
+                                        </form>
+                                        
                                         
                                     </ul>
                                 </div>

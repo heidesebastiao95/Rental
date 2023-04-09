@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Carro extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function categoria(){ return $this->belongsTo(\App\Models\Categoria::class,'categoria_id');}
 }

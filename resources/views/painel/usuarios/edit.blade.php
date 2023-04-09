@@ -50,38 +50,54 @@
                             <label class="form-label" for="fv-phone">Sexo</label>
                             <div class="form-control-wrap">
                                 <ul class="custom-control-group">
+                                    @empty($funcionario->sexo)
+                                    <li>
+                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                            <input type="radio" value="M" class="custom-control-input" name="sexo" id="sex-male">
+                                            <label class="custom-control-label" for="sex-male">Masculino</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                            <input type="radio" value="F" class="custom-control-input" name="sexo" id="sex-female" >
+                                            <label class="custom-control-label" for="sex-female">Feminino</label>
+                                        </div>
+                                    </li>
+                                    @else
                                     @switch($funcionario->sexo)
-                                        @case('M')
-                                        <li>
-                                            <div class="custom-control custom-radio custom-control-pro no-control">
-                                                <input type="radio" value="M" class="custom-control-input" name="sexo" id="sex-male" checked>
-                                                <label class="custom-control-label" for="sex-male">Masculino</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-radio custom-control-pro no-control">
-                                                <input type="radio" value="F" class="custom-control-input" name="sexo" id="sex-female" >
-                                                <label class="custom-control-label" for="sex-female">Feminino</label>
-                                            </div>
-                                        </li>
-                                            @break
-                                        @case('F')
-                                        <li>
-                                            <div class="custom-control custom-radio custom-control-pro no-control">
-                                                <input type="radio" value="M" class="custom-control-input" name="sexo" id="sex-male" >
-                                                <label class="custom-control-label" for="sex-male">Masculino</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-radio custom-control-pro no-control">
-                                                <input type="radio" value="F" class="custom-control-input" name="sexo" id="sex-female" checked>
-                                                <label class="custom-control-label" for="sex-female">Feminino</label>
-                                            </div>
-                                        </li>
-                                            @break
-                                        @default
-                                            
-                                    @endswitch
+                                    @case('M')
+                                    <li>
+                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                            <input type="radio" value="M" class="custom-control-input" name="sexo" id="sex-male" checked>
+                                            <label class="custom-control-label" for="sex-male">Masculino</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                            <input type="radio" value="F" class="custom-control-input" name="sexo" id="sex-female" >
+                                            <label class="custom-control-label" for="sex-female">Feminino</label>
+                                        </div>
+                                    </li>
+                                        @break
+                                    @case('F')
+                                    <li>
+                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                            <input type="radio" value="M" class="custom-control-input" name="sexo" id="sex-male" >
+                                            <label class="custom-control-label" for="sex-male">Masculino</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                            <input type="radio" value="F" class="custom-control-input" name="sexo" id="sex-female" checked>
+                                            <label class="custom-control-label" for="sex-female">Feminino</label>
+                                        </div>
+                                    </li>
+                                        @break
+                                    @default
+                                        
+                                @endswitch
+                                    @endempty
+                                   
                                 </ul>
                             </div>
                         </div>

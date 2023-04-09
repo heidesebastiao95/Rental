@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CarrosController;
+use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ReservasController;
 use Illuminate\Support\Facades\Route;
@@ -16,20 +19,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-
-Route::get('/', function () {
-    return view('painel.home');
-});
-Route::resource('/funcionarios',FuncionarioController::class);
-Route::resource('/reservas',ReservasController::class);
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    
+    Route::get('/', function () {
+        return view('painel.home');
+    })->name('painel');
+    Route::resource('/funcionarios',FuncionarioController::class);
+    Route::resource('/reservas',ReservasController::class);
+    Route::resource('/categorias',CategoriasController::class);
+    Route::resource('/carros',CarrosController::class);
+    Route::resource('/clientes',ClienteController::class);
+    Route::get('pesquisar-carros',[CarrosController::class,'pesquisar'])->name('carros.pesquisar');
 });

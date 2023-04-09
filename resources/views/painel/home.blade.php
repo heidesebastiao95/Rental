@@ -6,5 +6,11 @@
     ])
 @endsection
 @section('main')
-<h2>Heide Gruenst</h2>
+<div class="nk-block">
+    <div class="row g-gs">
+        <div class="card">
+            <h2>Seja bem Vindo ao Rental</h2>
+        </div>
+    </div>
+</div>
 @endsection

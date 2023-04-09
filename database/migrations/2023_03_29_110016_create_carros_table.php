@@ -13,12 +13,19 @@ return new class extends Migration
     {
         Schema::create('carros', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_categoria');
+            $table->unsignedBigInteger('categoria_id');
             $table->string('marca');
-            $table->enum('estado',['reservado','disponivel'])->default('disponivel');
+            $table->enum('estado',['reservado','disponivel','alugado'])->default('disponivel');
             $table->string('matricula');
+            $table->string('modelo');
+            $table->string('foto')->nullable();
             $table->integer('preco');
             $table->timestamps();
+
+            $table->foreign('categoria_id')
+                ->references('id')
+                ->on('categorias')
+                ->onDelete('cascade');
         });
     }
 

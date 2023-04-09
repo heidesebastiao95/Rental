@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class FuncionarioController extends Controller
+class ClienteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $funcionarios = User::all();
-        return view('painel.usuarios.index',[
-            'funcionarios' => $funcionarios
+        $clientes = User::all();
+        return view('painel.clientes.index',[
+            'clientes' => $clientes
         ]);
     }
 
@@ -24,7 +24,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('painel.usuarios.criar');
+        return view('painel.clientes.criar');
     }
 
     /**
@@ -32,7 +32,6 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-
         $imagem = $request->file('foto');
         $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
         $caminhoImagem = public_path('images');
@@ -44,14 +43,14 @@ class FuncionarioController extends Controller
             'sexo' => $request->sexo,
             'bi'=> $request->bi,
             'nascimento'=> $request->nascimento,
-            'role'=> 'funcionario',
+            'role'=> 'cliente',
             'password' => Hash::make($request->password),
             'endereco' => $request->endereco,
             'telefone' => $request->telefone,
             'foto'=> $nomeImagem
         ]);
 
-        return redirect()->back()->with('mensagem','Funcionário cadastrado com sucesso');
+        return redirect()->back()->with('mensagem','Cliente cadastrado com sucesso');
     }
 
     /**
@@ -67,12 +66,11 @@ class FuncionarioController extends Controller
      */
     public function edit(string $id)
     {
-        $funcionario = User::find($id);
+        $cliente = User::find($id);
         
-        return view('painel.usuarios.edit',[
-            'funcionario' => $funcionario
+        return view('painel.clientes.edit',[
+            'cliente' => $cliente
         ]);
-
     }
 
     /**
@@ -98,7 +96,7 @@ class FuncionarioController extends Controller
             'foto'=> $nomeImagem
         ]);
 
-        return redirect()->back()->with('mensagem','Funcionário actualizado com sucesso');
+        return redirect()->back()->with('mensagem','Cliente actualizado com sucesso');
     }
 
     /**

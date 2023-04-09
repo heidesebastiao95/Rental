@@ -1,15 +1,15 @@
 @extends('painel.layout.app')
 @section('titulo')
     @include('painel.componentes.header-content',[
-        'botao'=> ['texto'=> 'Voltar','icone'=>'arrow-left','rota'=> 'funcionarios.index'],
-        'titulo'=> 'Editar Funcionario',
+        'botao'=> ['texto'=> 'Voltar','icone'=>'arrow-left','rota'=> 'clientes.index'],
+        'titulo'=> 'Editar Cliente',
     ])
 @endsection
 @section('main')
 <div class="nk-block nk-block-lg">
     <div class="card">
         <div class="card-inner">
-            <form method="POST" action="{{ route('funcionarios.update',$funcionario->id) }}" enctype="multipart/form-data" class="form-validate">
+            <form method="POST" action="{{ route('clientes.update',$cliente->id) }}" enctype="multipart/form-data" class="form-validate">
                 @csrf
                 @method('PUT')
                 <div class="row g-gs">
@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <label class="form-label" for="fv-full-name">Nome Completo</label>
                             <div class="form-control-wrap">
-                                <input type="text" value="{{ $funcionario->name }}" class="form-control" id="fv-full-name" name="nome" required>
+                                <input type="text" value="{{ $cliente->name }}" class="form-control" id="fv-full-name" name="nome" required>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-mail"></em>
                                 </div>
-                                <input type="text" value="{{ $funcionario->email }}" class="form-control" id="fv-email" name="email" required>
+                                <input type="text" value="{{ $cliente->email }}" class="form-control" id="fv-email" name="email" required>
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="fv-phone">+244</span>
                                     </div>
-                                    <input type="text" value="{{ $funcionario->telefone }}" class="form-control" name="telefone" required>
+                                    <input type="text" value="{{ $cliente->telefone }}" class="form-control" name="telefone" required>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             <label class="form-label" for="fv-phone">Sexo</label>
                             <div class="form-control-wrap">
                                 <ul class="custom-control-group">
-                                    @switch($funcionario->sexo)
+                                    @switch($cliente->sexo)
                                         @case('M')
                                         <li>
                                             <div class="custom-control custom-radio custom-control-pro no-control">
@@ -90,7 +90,7 @@
                         <div class="form-group">
                             <label class="form-label" for="fv-subject">Nª Bilhete de Identidade</label>
                             <div class="form-control-wrap">
-                                <input type="text" value="{{ $funcionario->bi }}" class="form-control" id="fv-subject" name="bi" required>
+                                <input type="text" value="{{ $cliente->bi }}" class="form-control" id="fv-subject" name="bi" required>
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label class="form-label" for="fv-topics">Nascimento</label>
                             <div class="form-control-wrap">
-                                <input type="date" value="{{ $funcionario->nascimento }}" class="form-control" id="fv-subject" name="nascimento" required>
+                                <input type="date" value="{{ $cliente->nascimento }}" class="form-control" id="fv-subject" name="nascimento" required>
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                         <div class="form-group">
                             <label class="form-label" for="fv-subject">Endereço</label>
                             <div class="form-control-wrap">
-                                <input type="text" value="{{ $funcionario->endereco }}" class="form-control" id="fv-subject" name="endereco" required>
+                                <input type="text" value="{{ $cliente->endereco }}" class="form-control" id="fv-subject" name="endereco" required>
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <div class="form-group">
                             <label class="form-label" for="fv-message">Descrição</label>
                             <div class="form-control-wrap">
-                                <textarea value="{{ $funcionario->telefone }}" class="form-control form-control-sm" id="fv-message" name="descricao"></textarea>
+                                <textarea value="{{ $cliente->telefone }}" class="form-control form-control-sm" id="fv-message" name="descricao"></textarea>
                             </div>
                         </div>
                     </div>

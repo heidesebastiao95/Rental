@@ -1,60 +1,79 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
-
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
+@extends('auth.app')
+@section('main')
+<div class="nk-block">
+    <div class="row g-gs">
+            <div class="nk-content ">
+                <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
+                    <div class="brand-logo pb-4 text-center">
+                        <a href="#" class="logo-link">
+                            {{-- <img class="logo-light logo-img logo-img-lg" src="./images/logo.png" srcset="./images/logo2x.png 2x" alt="logo">
+                            <img class="logo-dark logo-img logo-img-lg" src="./images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark"> --}}
+                        </a>
+                    </div>
+                    <div class="card">
+                        <div class="card-inner card-inner-lg">
+                            <div class="nk-block-head">
+                                <div class="nk-block-head-content">
+                                    <h4 class="nk-block-title">Registrar</h4>
+                                    <div class="nk-block-des">
+                                        <p>Crie uma nova conta</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <form method="POST" action="{{ route('register') }}">
+                                @csrf
+                                <div class="form-group">
+                                    <div class="form-label-group">
+                                        <label class="form-label" for="default-01">Nome</label>
+                                    </div>
+                                    <div class="form-control-wrap">
+                                        <input name="name" type="text" class="form-control form-control-lg" id="default-01">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label-group">
+                                        <label class="form-label" for="default-01">Email</label>
+                                    </div>
+                                    <div class="form-control-wrap">
+                                        <input name="email" type="email" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address or username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label-group">
+                                        <label class="form-label" for="password">Palavra-passe</label>
+                                    </div>
+                                    <div class="form-control-wrap">
+                                        <a href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">
+                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                        </a>
+                                        <input name="password" type="password" class="form-control form-control-lg" id="password" placeholder="Enter your passcode">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label-group">
+                                        <label class="form-label" for="password">Confrmar Palavra-passe</label>
+                                    </div>
+                                    <div class="form-control-wrap">
+                                        <a href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">
+                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                        </a>
+                                        <input name="password_confirmation" type="password" class="form-control form-control-lg" id="password_confirmation">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block">Registrar</button>
+                                </div>
+                            </form>
+                            <div class="form-note-s2 text-center pt-4"> Já tem uma conta? <a href="{{ route('login') }}">Fazer login</a>
                             </div>
                         </div>
-                    </x-label>
+                    </div>
                 </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
             </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+    </div>
+</div>
+@endsection
+
+

@@ -18,13 +18,13 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('telefone');
-            $table->string('bi');
-            $table->enum('sexo',['M','F']);
-            $table->date('nascimento');
+            $table->string('telefone')->nullable();
+            $table->string('bi')->nullable();
+            $table->enum('sexo',['M','F'])->nullable();
+            $table->date('nascimento')->nullable();
             $table->enum('role',['admin','cliente','funcionario'])->default('cliente');
             $table->string('carta_conducao')->nullable();
-            $table->string('endereco');
+            $table->string('endereco')->nullable();
             $table->string('foto', 2048)->nullable();
             $table->timestamps();
         });
