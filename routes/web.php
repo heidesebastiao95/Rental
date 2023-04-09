@@ -26,7 +26,7 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/',function(){
-        return "Navega em 127.0.0.1/painel";
+        return view('painel.home');
     });
     
     Route::get('/painel', function () {
