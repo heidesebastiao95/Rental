@@ -25,13 +25,8 @@ Route::middleware([
     'verified'
 ])->group(function () {
 
-    Route::get('/',function(){
-        return view('painel.home');
-    });
-    
-    Route::get('/painel', function () {
-        return view('painel.home');
-    })->name('painel');
+    Route::get('/',function(){return view('web.home');});
+    Route::get('/painel', function () {return view('painel.home');})->name('painel');
     Route::resource('/funcionarios',FuncionarioController::class);
     Route::resource('/reservas',ReservasController::class);
     Route::resource('/categorias',CategoriasController::class);
