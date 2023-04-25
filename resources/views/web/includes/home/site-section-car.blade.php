@@ -2,28 +2,22 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3">
-          <h3>Our Offer</h3>
+          <h3>Nossas ofertas</h3>
           <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure nesciunt nemo vel earum maxime neque!</p>
           <p>
-            <a href="#" class="btn btn-primary custom-prev">Previous</a>
+            <a href="#" class="btn btn-primary custom-prev">Anterior</a>
             <span class="mx-2">/</span>
-            <a href="#" class="btn btn-primary custom-next">Next</a>
+            <a href="#" class="btn btn-primary custom-next">Próximo</a>
           </p>
         </div>
         <div class="col-lg-9">
-
-
-
-
           <div class="nonloop-block-13 owl-carousel">
             <div class="item-1">
-              <a href="#"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
+              <a href="#"><img src="{{ asset('web/images/img_1.jpg') }}" alt="Image" class="img-fluid"></a>
               <div class="item-1-contents">
                 <div class="text-center">
                 <h3><a href="#">Range Rover S64 Coupe</a></h3>
                 <div class="rating">
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
                   <span class="icon-star text-warning"></span>
                   <span class="icon-star text-warning"></span>
                   <span class="icon-star text-warning"></span>
@@ -53,10 +47,8 @@
                 </div>
               </div>
             </div>
-
-
             <div class="item-1">
-              <a href="#"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
+              <a href="#"><img src="{{ asset('web/images/img_2.jpg') }}" alt="Image" class="img-fluid"></a>
               <div class="item-1-contents">
                 <div class="text-center">
                 <h3><a href="#">Range Rover S64 Coupe</a></h3>
@@ -92,9 +84,7 @@
                 </div>
               </div>
             </div>
-
           </div>
-          
         </div>
       </div>
     </div>

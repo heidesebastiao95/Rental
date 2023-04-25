@@ -1,4 +1,4 @@
-<div class="site-section section-3" style="background-image: url('images/hero_2.jpg');">
+<div class="site-section section-3" style="background-image: url('{{ asset('web/images/servico2.jpg') }}');">
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-5">

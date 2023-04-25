@@ -1,10 +1,10 @@
 <div class="ftco-blocks-cover-1">
-    <div class="ftco-cover-1 overlay innerpage" style="background-image: url('images/hero_2.jpg')">
+    <div class="ftco-cover-1 overlay innerpage" style="background-image: url('{{ asset('web/images/cover.jpg') }}')">
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-lg-6 text-center">
-            <h1>Car Articles</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <h1>RentFácil</h1>
+            <p>Dirija com confiança - alugue conosco!</p>
           </div>
         </div>
       </div>

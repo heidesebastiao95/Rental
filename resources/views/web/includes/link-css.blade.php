@@ -6,3 +6,4 @@
 <link rel="stylesheet" href="{{ asset('web/css/owl.theme.default.min.css') }}">
 <link rel="stylesheet" href="{{ asset('web/fonts/flaticon/font/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('web/css/aos.css') }}">
+<link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
