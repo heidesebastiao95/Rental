@@ -14,8 +14,8 @@
         <div class="col-xxl-3 col-lg-4 col-sm-6">
             <div class="card card-bordered product-card">
                 <div class="product-thumb">
-                    <a href="html/product-details.html">
-                        <img class="card-img-top" src="./images/product/lg-a.jpg" alt="">
+                    <a href="#">
+                        <img class="card-img-top" src="{{ asset('images/'.$carro->foto) }}" alt="">
                     </a>
                     <ul class="product-badges">
                         <li><span class="badge bg-success">Novo</span></li>
@@ -31,8 +31,8 @@
                     </ul>
                 </div>
                 <div class="card-inner text-center">
-                    <h5 class="product-title"><a href="html/product-details.html">{{ $carro->marca }}</a></h5>
-                    <div class="product-price text-primary h5"> {{ $carro->preco }}kz</div>
+                    <h5 class="product-title"><a href="#">{{ $carro->marca }}</a></h5>
+                    <div class="product-price text-primary h5"> {{ $carro->preco }}kz/dia</div>
                     <ul class="product-tags">
                         <li><a href="#"></a>Modelo : {{ $carro->modelo }}</li>
                     </ul>

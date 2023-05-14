@@ -1,6 +1,5 @@
 @extends('web.layout.app')
 
 @section('sections')
-    @include('web.includes.home.site-section-car')
-    @include('web.includes.home.site-section-servicos')
+    @include('web.includes.servicos.servicos-section')
 @endsection

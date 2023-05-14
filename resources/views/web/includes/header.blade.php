@@ -15,11 +15,16 @@
 
           <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
             <ul class="site-menu main-menu js-clone-nav ml-auto ">
-              <li class="active"><a href="index.html" class="nav-link">Home</a></li>
-              <li><a href="services.html" class="nav-link">Serviços</a></li>
-              <li><a href="cars.html" class="nav-link">Carros</a></li>
-              <li><a href="about.html" class="nav-link">Sobre</a></li>
-              <li><a href="contact.html" class="nav-link">Contacto</a></li>
+              <li class="{{ (Route::is('home'))? 'active':'' }}"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
+              <li class="{{ (Route::is('servicos'))? 'active':'' }}"><a href="{{ route('servicos') }}" class="nav-link">Serviços</a></li>
+              <li class="{{ (Route::is('carros'))? 'active':'' }}"><a href="{{ route('carros') }}" class="nav-link">Carros</a></li>
+              <li class="{{ (Route::is('sobre'))? 'active':'' }}"><a href="{{ route('sobre') }}" class="nav-link">Sobre</a></li>
+              <li class="{{ (Route::is('contacto'))? 'active':'' }}"><a href="{{ route('contacto') }}" class="nav-link">Contacto</a></li>
+              @auth
+                  @if (Auth::user()->role == 'admin')
+                    <li><a href="{{ route('painel') }}" class="nav-link">Painel</a></li>
+                  @endif
+              @endauth
             </ul>
           </nav>
         </div>

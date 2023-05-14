@@ -39,8 +39,8 @@
                             <span class="nk-menu-text">Clientes</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
+                    <li class="nk-menu-item {{ Route::is('pagamentos.*')? 'active':'' }}">
+                        <a href="{{ route('pagamentos.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-coin-alt-fill"></em></span>
                             <span class="nk-menu-text">Pagamentos</span>
                         </a>
@@ -58,15 +58,15 @@
                         </a>
                     </li><!-- .nk-menu-item -->
                     {{-- <li class="nk-menu-item">
-                        <a href="html/ecommerce/integration.html" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-star-fill"></em></span>
-                            <span class="nk-menu-text">Avaliações</span>
-                        </a>
-                    </li><!-- .nk-menu-item --> --}}
-                    <li class="nk-menu-item">
                         <a href="#" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-setting-fill"></em></span>
                             <span class="nk-menu-text">Definições</span>
+                        </a>
+                    </li><!-- .nk-menu-item --> --}}
+                    <li class="nk-menu-item {{ Route::is('pagina')? 'active':'' }}">
+                        <a href="{{ route('home') }}" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-arrow-left"></em></span>
+                            <span class="nk-menu-text">Pagina</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                 </ul><!-- .nk-menu -->

@@ -3,8 +3,8 @@
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-lg-6 text-center">
-            <h1>RentFácil</h1>
-            <p>Dirija com confiança - alugue conosco!</p>
+            <h1>{{ $cover['titulo'] }}</h1>
+            <p>{{ $cover['descricao'] }}</p>
           </div>
         </div>
       </div>

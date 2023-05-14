@@ -1,8 +1,8 @@
 @extends('painel.layout.app')
 @section('titulo')
     @include('painel.componentes.header-content',[
-        'titulo'=> 'Painel',
-        'botao'=> ['texto'=> 'Nova Categoria','icone'=>'plus','rota'=> 'funcionario.create'],
+        'titulo'=> 'Categoria',
+        'botao'=> ['texto'=> 'Nova Categoria','icone'=>'plus','rota'=> '#'],
         'data_target' => ['form'=> 'addProduct']
     ])
 @endsection

@@ -1,8 +1,9 @@
 @extends('painel.layout.app')
 @section('titulo')
     @include('painel.componentes.header-content',[
-        'titulo'=> 'Painel',
-        //'botao'=> ['texto'=> 'Novo Funcionário','icone'=>'plus','rota'=> 'funcionario.create']
+        'titulo'=> 'Pagamento',
+        'botao'=> ['texto'=> 'Novo Pagamento','icone'=>'plus','rota'=> '#'],
+        'data_target' => ['form'=> 'addPagamento']
     ])
 @endsection
 @section('main')
@@ -11,87 +12,169 @@
             <table class="datatable-init-export nowrap table  nk-tb-list nk-tb-ulist" data-auto-responsive="false" data-export-title="Export">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">Cliente</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Carro</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Partida</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Destino</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Data</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Estado</span></th>
+                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Cliente</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Banco</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Quantia</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Estado</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Anexo</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
+                            Ação
                         </th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($pagamentos as $pagamento)
                     <tr class="nk-tb-item">
-                        <td class="nk-tb-col">
-                            <div class="user-card">
-                                <div class="user-avatar bg-dim-primary d-none d-sm-flex">
-                                    <span>AB</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="tb-lead">Abu Bin Ishtiyak <span class="dot dot-success d-md-none ms-1"></span></span>
-                                    <span>info@softnio.com</span>
-                                </div>
-                            </div>
-                        </td>
                         <td class="nk-tb-col tb-col-mb" data-order="35040.34">
-                            <span class="tb-amount">35040.34 <span class="currency">USD</span></span>
+                            <span class="tb-amount">{{ $pagamento->cliente->name }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-md">
-                            <span>+811 847-4958</span>
+                            <span>{{ $pagamento->banco }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
-                            <ul class="list-status">
-                                <li><em class="icon text-success ni ni-check-circle"></em> <span>Email</span></li>
-                                <li><em class="icon ni ni-alert-circle"></em> <span>KYC</span></li>
-                            </ul>
-                        </td>
-                        <td class="nk-tb-col tb-col-lg">
-                            <span>05 Oct 2019</span>
+                            <span>{{ $pagamento->quantia }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-md">
-                            <span class="tb-status text-success">Active</span>
+                            @switch($pagamento->estado)
+                                @case('pendente')
+                                <span class="badge tb-status text-white bg-warning ">Pendente</span>
+                                    @break
+                                @case('validado')
+                                <span class="badge tb-status text-white bg-success ">Validado</span>
+                                    @break
+                                @case('invalidado')
+                                <span class="badge tb-status text-white bg-danger ">Invalidado</span>
+                                    @break
+                                @default
+                                    
+                            @endswitch
+                        </td>
+                        <td class="nk-tb-col tb-col-lg">
+                            <a href="{{ route('pagamentos.anexo',$pagamento->id) }}" target="_blank" rel="noopener noreferrer">
+                                <span class="tb-amount"><h6><em class="icon ni ni-file"></em></h6></span>
+                            </a>
                         </td>
                         <td class="nk-tb-col nk-tb-col-tools">
                             <ul class="nk-tb-actions gx-1">
                                 <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
-                                        <em class="icon ni ni-wallet-fill"></em>
-                                    </a>
+                                    <form method="POST" action="{{ route('pagamentos.destroy',$pagamento->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
+                                            <em class="icon ni ni-trash"></em>
+                                        </button>
+                                    </form>
                                 </li>
                                 <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                        <em class="icon ni ni-mail-fill"></em>
-                                    </a>
+                                    <form method="POST" action="{{ route('pagamentos.atualizar',$pagamento->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Atualizar">
+                                        @switch($pagamento->estado)
+                                            @case('validado')
+                                            <em class="icon ni ni-cross"></em>
+                                                @break
+                                            @case('invalidado')
+                                                <em class="icon ni ni-check"></em>
+                                                @break
+
+                                            @case('pendente')
+                                                <em class="icon ni ni-check"></em>
+                                                @break
+                                            @default
+                                                
+                                        @endswitch
+                                        </button>
+                                    </form>
                                 </li>
                                 <li class="nk-tb-action-hidden">
-                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirmar">
-                                        <em class="icon ni ni-user-cross-fill"></em>
+                                    <a href="{{ route('pagamentos.edit',$pagamento->id) }}" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                        <em class="icon ni ni-pen-fill"></em>
                                     </a>
-                                </li>
-                                <li>
-                                    <div class="drodown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick View</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-repeat"></em><span>Transaction</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#"><em class="icon ni ni-shield-star"></em><span>Reset Pass</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset 2FA</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-na"></em><span>Suspend User</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </li>
                             </ul>
                         </td>
                     </tr><!-- .nk-tb-item  -->
-                    
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div><!-- .card-preview -->
+
+    <div class="nk-add-product toggle-slide toggle-slide-right" data-content="addPagamento" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+        <form method="POST" action="{{ route('pagamentos.store') }}" enctype="multipart/form-data">
+            @csrf
+        <div class="nk-block-head">
+            <div class="nk-block-head-content">
+                <h5 class="nk-block-title">Novo pagamento</h5>
+            </div>
+        </div><!-- .nk-block-head -->
+        <div class="nk-block">
+            <div class="row g-3">
+                <div class="col-mb-6">
+                    <div class="form-group">
+                        <label class="form-label">Cliente</label>
+                        <div class="form-control-wrap">
+                            <select name="cliente" class="form-select js-select2" data-search="on">
+                                @isset($clientes)
+                                    @foreach ($clientes as $cliente)
+                                    <option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-mb-6">
+                    <div class="form-group">
+                        <label class="form-label">Reserva</label>
+                        <div class="form-control-wrap">
+                            <select name="reserva" class="form-select js-select2" data-search="on">
+                                @isset($reservas)
+                                    @foreach ($reservas as $reserva)
+                                    <option value="{{ $reserva->id }}">{{ $reserva->id }}</option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-mb-6">
+                    <div class="form-group">
+                        <label class="form-label">Banco</label>
+                        <div class="form-control-wrap">
+                            <select name="banco" class="form-select js-select2" data-search="on">
+                                <option value="BAI">BAI</option>
+                                <option value="BFA">BFA</option>
+                                <option value="Millenium">Millenium</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-mb-6">
+                    <div class="form-group">
+                        <label class="form-label" for="sale-price">Quantia</label>
+                        <div class="form-control-wrap">
+                            <input type="number" name="quantia" class="form-control" id="sale-price">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-mb-6">
+                    <div class="form-group">
+                        <label class="form-label" for="fv-topics">Anexo</label>
+                        <div class="form-control-wrap">
+                            <input type="file" class="form-control" id="fv-subject" name="anexo">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Salvar</span></button>
+                </div>
+                
+            </div>
+        </div><!-- .nk-block -->
+    </form>
+    </div>
 @endsection

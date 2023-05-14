@@ -19,7 +19,7 @@
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
                                         <li><a href="{{ route('clientes.edit',$cliente->id) }}"><em class="icon ni ni-focus"></em><span>Editar</span></a></li>
-                                        <li><a href="{{ route('clientes.show',$cliente->id) }}"><em class="icon ni ni-eye"></em><span>Ver Detalhes</span></a></li>
+                                        {{-- <li><a href="{{ route('clientes.show',$cliente->id) }}"><em class="icon ni ni-eye"></em><span>Ver Detalhes</span></a></li> --}}
                                         <form action="{{ route('clientes.destroy',$cliente->id) }}" method="delete"><li><a href="{{ route('clientes.destroy',$cliente->id) }}"><em class="icon ni ni-mail"></em><span>Eliminar</span></a></li></form>
                                         
                                     </ul>
@@ -28,17 +28,21 @@
                         </div>
                         <div class="user-card user-card-s2">
                             <div class="user-avatar md bg-primary">
-                                <img src="{{ asset('images/'.$cliente->foto) }}" alt="HS">
-                                <div class="status dot dot-lg dot-success"></div>
+                                @empty($cliente->foto)
+                                <span>{{ substr($cliente->name,0,1) }}</span>
+                                @else
+                                    <img src="{{ asset('images/'.$cliente->foto) }}" alt="HS">
+                                @endempty
+                                {{-- <div class="status dot dot-lg dot-success"></div> --}}
                             </div>
                             <div class="user-info">
                                 <h6>{{ $cliente->name }}</h6>
                                 <span class="sub-text">{{ $cliente->email }}</span>
                             </div>
                         </div>
-                        <div class="team-view">
+                        {{-- <div class="team-view">
                             <a href="html/user-details-regular.html" class="btn btn-round btn-outline-light w-150px"><span>Ver Perfil</span></a>
-                        </div>
+                        </div> --}}
                     </div><!-- .team -->
                 </div><!-- .card-inner -->
             </div><!-- .card -->

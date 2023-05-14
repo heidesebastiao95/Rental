@@ -19,7 +19,7 @@
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
                                         <li><a href="{{ route('funcionarios.edit',$funcionario->id) }}"><em class="icon ni ni-pen"></em><span>Editar</span></a></li>
-                                        <li><a href="{{ route('funcionarios.show',$funcionario->id) }}"><em class="icon ni ni-eye"></em><span>Ver Detalhes</span></a></li>
+                                        {{-- <li><a href="{{ route('funcionarios.show',$funcionario->id) }}"><em class="icon ni ni-eye"></em><span>Ver Detalhes</span></a></li> --}}
                                         <form action="{{ route('funcionarios.destroy', $funcionario->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -33,17 +33,21 @@
                         </div>
                         <div class="user-card user-card-s2">
                             <div class="user-avatar md bg-primary">
-                                <img src="{{ asset('images/'.$funcionario->foto) }}" alt="HS">
-                                <div class="status dot dot-lg dot-success"></div>
+                                @empty($funcionario->foto)
+                                <span>{{ substr($funcionario->name,0,1) }}</span>
+                                @else
+                                    <img src="{{ asset('images/'.$funcionario->foto) }}" alt="HS">
+                                @endempty
+                                {{-- <div class="status dot dot-lg dot-success"></div> --}}
                             </div>
                             <div class="user-info">
                                 <h6>{{ $funcionario->name }}</h6>
                                 <span class="sub-text">{{ $funcionario->email }}</span>
                             </div>
                         </div>
-                        <div class="team-view">
+                        {{-- <div class="team-view">
                             <a href="html/user-details-regular.html" class="btn btn-round btn-outline-light w-150px"><span>Ver Perfil</span></a>
-                        </div>
+                        </div> --}}
                     </div><!-- .team -->
                 </div><!-- .card-inner -->
             </div><!-- .card -->

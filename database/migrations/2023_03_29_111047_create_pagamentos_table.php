@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('banco');
             $table->string('anexo');
             $table->enum('estado',['validado','invalidado','pendente'])->default('pendente');
+            $table->integer('quantia');
             $table->timestamps();
 
             $table->foreign('user_id')

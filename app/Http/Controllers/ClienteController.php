@@ -13,7 +13,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = User::all();
+        $clientes = User::where('role','cliente')->get();
         return view('painel.clientes.index',[
             'clientes' => $clientes
         ]);
@@ -32,10 +32,28 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $imagem = $request->file('foto');
-        $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
-        $caminhoImagem = public_path('images');
-        $imagem->move($caminhoImagem, $nomeImagem);
+        if(!empty($request->file('foto')))
+        {
+            $imagem = $request->file('foto');
+            $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
+            $caminhoImagem = public_path('images');
+            $imagem->move($caminhoImagem, $nomeImagem);
+
+            User::create([
+                'name'=> $request->nome,
+                'email'=> $request->email,
+                'sexo' => $request->sexo,
+                'bi'=> $request->bi,
+                'nascimento'=> $request->nascimento,
+                'role'=> 'cliente',
+                'password' => Hash::make($request->password),
+                'endereco' => $request->endereco,
+                'telefone' => $request->telefone,
+                'foto'=> $nomeImagem
+            ]);
+
+            return redirect()->back()->with('mensagem','Cliente cadastrado com sucesso');
+        }
 
         User::create([
             'name'=> $request->nome,
@@ -47,7 +65,6 @@ class ClienteController extends Controller
             'password' => Hash::make($request->password),
             'endereco' => $request->endereco,
             'telefone' => $request->telefone,
-            'foto'=> $nomeImagem
         ]);
 
         return redirect()->back()->with('mensagem','Cliente cadastrado com sucesso');
@@ -78,10 +95,28 @@ class ClienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $imagem = $request->file('foto');
-        $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
-        $caminhoImagem = public_path('images');
-        $imagem->move($caminhoImagem, $nomeImagem);
+        if(!empty($request->file('foto')))
+        {
+            $imagem = $request->file('foto');
+            $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
+            $caminhoImagem = public_path('images');
+            $imagem->move($caminhoImagem, $nomeImagem);
+
+            User::where('id',$id)->update([
+                'name'=> $request->nome,
+                'email'=> $request->email,
+                'sexo' => $request->sexo,
+                'bi'=> $request->bi,
+                'nascimento'=> $request->nascimento,
+                'role'=> 'cliente',
+                'password' => Hash::make($request->password),
+                'endereco' => $request->endereco,
+                'telefone' => $request->telefone,
+                'foto'=> $nomeImagem
+            ]);
+
+            return redirect()->back()->with('mensagem','Cliente actualizado com sucesso');
+        }
 
         User::where('id',$id)->update([
             'name'=> $request->nome,
@@ -93,7 +128,6 @@ class ClienteController extends Controller
             'password' => Hash::make($request->password),
             'endereco' => $request->endereco,
             'telefone' => $request->telefone,
-            'foto'=> $nomeImagem
         ]);
 
         return redirect()->back()->with('mensagem','Cliente actualizado com sucesso');

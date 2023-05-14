@@ -13,7 +13,7 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = User::all();
+        $funcionarios = User::where('role','funcionario')->orWhere('role','admin')->get();
         return view('painel.usuarios.index',[
             'funcionarios' => $funcionarios
         ]);
@@ -33,10 +33,28 @@ class FuncionarioController extends Controller
     public function store(Request $request)
     {
 
-        $imagem = $request->file('foto');
-        $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
-        $caminhoImagem = public_path('images');
-        $imagem->move($caminhoImagem, $nomeImagem);
+        if(!empty($request->file('foto')))
+        {
+            $imagem = $request->file('foto');
+            $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
+            $caminhoImagem = public_path('images');
+            $imagem->move($caminhoImagem, $nomeImagem);
+
+            User::create([
+                'name'=> $request->nome,
+                'email'=> $request->email,
+                'sexo' => $request->sexo,
+                'bi'=> $request->bi,
+                'nascimento'=> $request->nascimento,
+                'role'=> 'funcionario',
+                'password' => Hash::make($request->password),
+                'endereco' => $request->endereco,
+                'telefone' => $request->telefone,
+                'foto'=> $nomeImagem
+            ]);
+
+            return redirect()->back()->with('mensagem','Funcionário cadastrado com sucesso');
+        }
 
         User::create([
             'name'=> $request->nome,
@@ -48,7 +66,6 @@ class FuncionarioController extends Controller
             'password' => Hash::make($request->password),
             'endereco' => $request->endereco,
             'telefone' => $request->telefone,
-            'foto'=> $nomeImagem
         ]);
 
         return redirect()->back()->with('mensagem','Funcionário cadastrado com sucesso');
@@ -80,10 +97,29 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $imagem = $request->file('foto');
-        $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
-        $caminhoImagem = public_path('images');
-        $imagem->move($caminhoImagem, $nomeImagem);
+        if(!empty($request->file('foto')))
+        {
+            $imagem = $request->file('foto');
+            $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
+            $caminhoImagem = public_path('images');
+            $imagem->move($caminhoImagem, $nomeImagem);
+
+            User::where('id',$id)->update([
+                'name'=> $request->nome,
+                'email'=> $request->email,
+                'sexo' => $request->sexo,
+                'bi'=> $request->bi,
+                'nascimento'=> $request->nascimento,
+                'role'=> 'funcionario',
+                'password' => Hash::make($request->password),
+                'endereco' => $request->endereco,
+                'telefone' => $request->telefone,
+                'foto'=> $nomeImagem
+            ]);
+
+            return redirect()->back()->with('mensagem','Funcionário actualizado com sucesso');
+        }
+
 
         User::where('id',$id)->update([
             'name'=> $request->nome,
@@ -91,11 +127,10 @@ class FuncionarioController extends Controller
             'sexo' => $request->sexo,
             'bi'=> $request->bi,
             'nascimento'=> $request->nascimento,
-            'role'=> 'cliente',
+            'role'=> 'funcionario',
             'password' => Hash::make($request->password),
             'endereco' => $request->endereco,
             'telefone' => $request->telefone,
-            'foto'=> $nomeImagem
         ]);
 
         return redirect()->back()->with('mensagem','Funcionário actualizado com sucesso');
