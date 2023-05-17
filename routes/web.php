@@ -40,6 +40,7 @@ Route::middleware([
     Route::get('/home',[HomeController::class,'index'])->name('home');
     Route::get('/servicos',[ServicosController::class,'servicos'])->name('servicos');
     Route::get('/carros',[WebCarrosController::class,'index'])->name('carros');
+    Route::get('/detalhe-carro/{id}',[WebCarrosController::class,'detalheCarro'])->name('carro.detalhe');
     Route::get('/sobre',[SobreController::class,'sobre'])->name('sobre');
     Route::get('/contacto',[ContactoController::class,'contacto'])->name('contacto');
     Route::post('/enviar-mensagem',[MensagemController::class,'enviar_mensagem'])->name('enviar.mensagem');

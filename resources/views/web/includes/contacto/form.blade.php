@@ -1,29 +1,62 @@
-<div class="col-lg-8 mb-5" >
+<div class="col-lg-8 mb-6" >
     <form action="{{ route('enviar.mensagem') }}" method="post">
       @csrf
       <div class="form-group row">
         <div class="col-md-6 mb-4 mb-lg-0">
-          <input name="primeiro_nome" type="text" class="form-control" placeholder="Primeiro nome">
+          <label for="">Nome</label>
+          <input name="nome" type="text" class="form-control" placeholder="Nome">
         </div>
         <div class="col-md-6">
-          <input name="segundo_nome"  type="text" class="form-control" placeholder="Último nome">
+          <label for="">Nº Bilhete</label>
+          <input name="bi"  type="text" class="form-control" placeholder="Nº BI">
         </div>
       </div>
 
       <div class="form-group row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+          <label for="">Email</label>
           <input name="email"  type="text" class="form-control" placeholder="Email">
         </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-md-12">
-          <textarea name="mensagem" id="" class="form-control" placeholder="Escreva sua mensagem." cols="30" rows="10"></textarea>
+        <div class="col-md-6">
+          <label for="">Endereço</label>
+          <input name="endereço"  type="text" class="form-control" placeholder="Endereço">
         </div>
       </div>
       <div class="form-group row">
+        <div class="col-md-6">
+          <label for="">Nacimento</label>
+          <input name="data"  type="date" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="">Foto</label>
+          <input name="foto"  type="file" class="form-control" placeholder="Endereço">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label>Banco</label>
+          <select name="banco" class="form-select form-control">
+            <option value="BAI">BAI</option>
+            <option value="BFA">BFA</option>
+            <option value="Millenium">Millenium</option>
+         </select>
+        </div>
+        <div class="col-md-6">
+          <label for="">Quantia</label>
+          <input name="quantia"  type="number" class="form-control" value="00" readonly>
+        </div>
+     </div>
+
+     <div class="form-group row">
+      <div class="col-md-6">
+        <label for="">Anexo</label>
+        <input name="anexo"  type="file" class="form-control" placeholder="Endereço">
+      </div>
+     </div>
+      <div class="form-group row">
         <div class="col-md-6 mr-auto">
-          <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Enviar Mensagem">
+          <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Arrendar">
         </div>
       </div>
     </form>

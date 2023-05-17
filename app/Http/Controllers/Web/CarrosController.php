@@ -20,4 +20,14 @@ class CarrosController extends Controller
             ]
         ]);
     }
+
+    public function detalheCarro($id)
+    {
+        return view('web.detalhe-carro',[
+            'cover'=> [
+                'titulo' => 'Carros',
+                'descricao' => 'Verifeque nossos Carros!'
+            ]
+        ]);
+    }
 }

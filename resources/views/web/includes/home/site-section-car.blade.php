@@ -14,7 +14,7 @@
           <div class="nonloop-block-13 owl-carousel">
             @foreach ($carros as $carro)
                 <div class="item-1">
-                    <a href="#"><img src="{{ asset('web/images/img_1.jpg') }}" alt="Image" class="img-fluid"></a>
+                    <a href="#"><img src="{{ asset('images/'.$carro->foto) }}" alt="Image" class="img-fluid"></a>
                     <div class="item-1-contents">
                       <div class="text-center">
                       <h3><a href="#">{{ $carro->marca }} {{ $carro->modelo }}</a></h3>

@@ -4,7 +4,7 @@
        @foreach ($carros as $carro)
        <div class="col-lg-4 col-md-6 mb-4">
         <div class="item-1">
-            <a href="#"><img src="{{ asset('web/images/img_1.jpg') }}" alt="Image" class="img-fluid"></a>
+            <a href="#"><img src="{{ asset('images/'.$carro->foto) }}" alt="Image" class="img-fluid"></a>
             <div class="item-1-contents">
               <div class="text-center">
               <h3><a href="#">{{ $carro->marca }} {{ $carro->modelo }}</a></h3>
@@ -36,7 +36,7 @@
                 </li>
               </ul>
               <div class="d-flex action">
-                <a href="contact.html" class="btn btn-primary">Aluga já</a>
+                <a href="{{ route('carro.detalhe',$carro->id) }}" class="btn btn-primary">Aluga já</a>
               </div>
             </div>
           </div>
