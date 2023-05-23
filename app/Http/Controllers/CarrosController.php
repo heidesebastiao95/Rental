@@ -34,6 +34,15 @@ class CarrosController extends Controller
      */
     public function store(Request $request)
     {
+       $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'categoria' => 'required',
+            'marca' => 'required',
+            'modelo' => 'required',
+            'matricula' => 'required',
+            'preco' => 'required|numeric',
+        ]);
+
         $imagem = $request->file('foto');
         $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
         $caminhoImagem = public_path('images');
@@ -77,6 +86,15 @@ class CarrosController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'categoria' => 'required',
+            'marca' => 'required',
+            'modelo' => 'required',
+            'matricula' => 'required',
+            'preco' => 'required|numeric',
+        ]);
+        
         $imagem = $request->file('foto');
         $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
         $caminhoImagem = public_path('images');

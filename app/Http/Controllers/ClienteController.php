@@ -32,6 +32,18 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nome' => 'required',
+            'email' => 'required|email',
+            'sexo' => 'required',
+            'bi' => 'required',
+            'nascimento' => 'required|date',
+            'password' => 'required|min:8',
+            'endereco' => 'required',
+            'telefone' => 'required',
+        ]);
+
         if(!empty($request->file('foto')))
         {
             $imagem = $request->file('foto');
@@ -95,6 +107,17 @@ class ClienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validatedData = $request->validate([
+        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'nome' => 'required',
+        'email' => 'required|email',
+        'sexo' => 'required',
+        'bi' => 'required',
+        'nascimento' => 'required|date',
+        'password' => 'required|min:8',
+        'endereco' => 'required',
+        'telefone' => 'required',
+    ]);
         if(!empty($request->file('foto')))
         {
             $imagem = $request->file('foto');

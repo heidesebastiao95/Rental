@@ -9,7 +9,13 @@ class MensagemController extends Controller
 {
     public function enviar_mensagem(Request $request)
     {
-        $nome = $request->primeiro_nome . $request->segundo_nome;
+        $validatedData = $request->validate([
+            'nome' => 'required',
+            'email' => 'required|email',
+            'mensagem' => 'required',
+        ]);
+
+        $nome = $request->nome;
         $email = $request->email;
         $mensagem = $request->mensagem;
 
