@@ -129,18 +129,16 @@
             </div>
             
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div><!-- .nk-block -->
 </form>
 </div>
-<div class="mt-4">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span></li>
-        <li class="page-item"><a class="page-link" href="#">6</a></li>
-        <li class="page-item"><a class="page-link" href="#">7</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-    </div>
 @endsection

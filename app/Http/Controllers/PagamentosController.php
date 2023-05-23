@@ -39,6 +39,13 @@ class PagamentosController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'cliente' => 'required', // Exemplo de validação de campo obrigatório
+            'reserva' => 'required',
+            'banco' => 'required',
+            'anexo' => 'required|file', // Exemplo de validação de campo obrigatório e arquivo
+        ]);
+        
         $anexo = $request->file('anexo');
         $nomeAnexo = time().'.'.$anexo->getClientOriginalExtension();
         $caminhoAnexo = public_path('anexos');
@@ -84,6 +91,13 @@ class PagamentosController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'cliente' => 'required', // Exemplo de validação de campo obrigatório
+            'reserva' => 'required',
+            'banco' => 'required',
+            'anexo' => 'required|file', // Exemplo de validação de campo obrigatório e arquivo
+        ]);
+
         $anexo = $request->file('anexo');
         $nomeAnexo = time().'.'.$anexo->getClientOriginalExtension();
         $caminhoAnexo = public_path('anexos');
@@ -96,6 +110,8 @@ class PagamentosController extends Controller
             'quantia' => $request->quantia,
             'anexo' => $nomeAnexo
         ]);
+
+        
 
         return redirect()->back()->with('mensagem','Pagamento actualizado com sucesso');
     }

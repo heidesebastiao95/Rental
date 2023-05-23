@@ -15,7 +15,7 @@
             
             <div class="nk-block">
                 <div class="row g-3">
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div class="form-group">
                             <label class="form-label" for="product-title">Partida</label>
                             <div class="form-control-wrap">
@@ -30,7 +30,7 @@
                                 <input value="{{ $reserva->destino }}" type="text" name="destino" class="form-control" id="sale-price">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label class="form-label">Cliente</label>
                         <div class="form-control-wrap">
@@ -103,6 +103,15 @@
                     ]
                 ])
             @endif
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         </div>
     </div>
 </div><!-- .nk-block -->

@@ -69,6 +69,15 @@
                             <div class="form-note-s2 text-center pt-4"> Já tem uma conta? <a href="{{ route('login') }}">Fazer login</a>
                             </div>
                         </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

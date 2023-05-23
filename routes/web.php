@@ -11,6 +11,7 @@ use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\Web\CarrosController as WebCarrosController;
 use App\Http\Controllers\Web\ContactoController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\PagamentoController;
 use App\Http\Controllers\Web\ServicosController;
 use App\Http\Controllers\Web\SobreController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,7 @@ Route::middleware([
     Route::get('/sobre',[SobreController::class,'sobre'])->name('sobre');
     Route::get('/contacto',[ContactoController::class,'contacto'])->name('contacto');
     Route::post('/enviar-mensagem',[MensagemController::class,'enviar_mensagem'])->name('enviar.mensagem');
+    Route::post('/pagamento',[PagamentoController::class,'pagamento'])->name('pagamento.store');
     ////admin rotas
     Route::group(['prefix'=> 'admin'],function(){
         Route::get('/painel',[PainelController::class,'index'])->name('painel');

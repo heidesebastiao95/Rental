@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('carro_id');
-            $table->string('partida');
-            $table->string('destino');
+            $table->string('partida')->nullable();
+            $table->string('destino')->nullable();
             $table->enum('estado',['confirmado','cancelado','pendente'])->default('pendente');
             $table->timestamps();
 

@@ -14,8 +14,8 @@
                     <tr class="nk-tb-item nk-tb-head">
                         <th class="nk-tb-col"><span class="sub-text">Cliente</span></th>
                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Carro</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Partida</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Destino</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Matricula</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Preço</span></th>
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Data</span></th>
                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Estado</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
@@ -42,10 +42,10 @@
                             <span class="tb-amount">{{ $reserva->carro->marca }} <span class="currency"></span></span>
                         </td>
                         <td class="nk-tb-col tb-col-md">
-                            <span class="tb-lead">{{ $reserva->partida }}</span>
+                            <span class="tb-lead">{{ $reserva->carro->matricula }}</span>
                         </td>
                         <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
-                            <span class="tb-lead">{{ $reserva->destino }}</span>
+                            <span class="tb-lead">{{ $reserva->carro->preco }} kz</span>
                         </td>
                         <td class="nk-tb-col tb-col-lg">
                             <span class="tb-lead">{{ $reserva->created_at }}</span>
@@ -102,7 +102,7 @@
         </div><!-- .nk-block-head -->
         <div class="nk-block">
             <div class="row g-3">
-                <div class="col-12">
+                {{-- <div class="col-12">
                     <div class="form-group">
                         <label class="form-label" for="product-title">Partida</label>
                         <div class="form-control-wrap">
@@ -117,7 +117,7 @@
                             <input type="text" name="destino" class="form-control" id="sale-price">
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label class="form-label">Cliente</label>
                     <div class="form-control-wrap">
@@ -145,6 +145,15 @@
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Salvar</span></button>
                 </div>
+                @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
                 
             </div>
         </div><!-- .nk-block -->

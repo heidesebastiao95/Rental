@@ -46,7 +46,7 @@
                         </li>
                       </ul>
                       <div class="d-flex action">
-                        <a href="contact.html" class="btn btn-primary">Aluga já</a>
+                        <a href="{{ route('carro.detalhe',$carro->id) }}" class="btn btn-primary">Aluga já</a>
                       </div>
                     </div>
                   </div>

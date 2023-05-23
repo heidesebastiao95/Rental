@@ -1,31 +1,23 @@
 <div class="col-lg-4">
   <div class="feature-car-rent-box-1">
-    <h3>Range Rover S7</h3>
+    <h3>{{ $carro->marca }}</h3>
     <ul class="list-unstyled">
       <li>
-        <span>Doors</span>
-        <span class="spec">4</span>
+        <span>Modelo</span>
+        <span class="spec">{{ $carro->modelo ?? '' }}</span>
       </li>
       <li>
-        <span>Seats</span>
-        <span class="spec">6</span>
+        <span>Matricula</span>
+        <span class="spec">{{ $carro->matricula ?? '' }}</span>
       </li>
       <li>
-        <span>Lugage</span>
-        <span class="spec">2 Suitcase/2 Bags</span>
-      </li>
-      <li>
-        <span>Transmission</span>
-        <span class="spec">Automatic</span>
-      </li>
-      <li>
-        <span>Minium age</span>
-        <span class="spec">Automatic</span>
+        <span>Categoria</span>
+        <span class="spec">{{ $carro->categoria->nome ?? '' }}</span>
       </li>
     </ul>
     <div class="d-flex align-items-center bg-light p-3">
-      <span>$150/day</span>
-      <a href="contact.html" class="ml-auto btn btn-primary">Rent Now</a>
+      <span>${{ $carro->preco }}/dia</span>
+      <a href="contact.html" class="ml-auto btn btn-primary disabled" >Aluga já</a>
     </div>
   </div>
 </div>

@@ -122,7 +122,10 @@ class ReservasController extends Controller
      */
     public function destroy(string $id)
     {
+        $reserva = Reserva::find($id);
+        $reserva->carro->update(['estado' => 'disponivel']);
         Reserva::where('id',$id)->delete();
+        
 
         return redirect()->back();
     }

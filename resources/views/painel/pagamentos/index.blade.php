@@ -172,7 +172,15 @@
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Salvar</span></button>
                 </div>
-                
+                @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             </div>
         </div><!-- .nk-block -->
     </form>

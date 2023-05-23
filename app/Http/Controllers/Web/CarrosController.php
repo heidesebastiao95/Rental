@@ -23,11 +23,13 @@ class CarrosController extends Controller
 
     public function detalheCarro($id)
     {
+        $carro = Carro::find($id);
         return view('web.detalhe-carro',[
             'cover'=> [
                 'titulo' => 'Carros',
                 'descricao' => 'Verifeque nossos Carros!'
-            ]
+            ],
+            'carro' => $carro
         ]);
     }
 }
