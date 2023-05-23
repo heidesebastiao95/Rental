@@ -588,17 +588,28 @@
   // Dark Mode Switch @since v2.0
   NioApp.ModeSwitch = function () {
     var toggle = $('.dark-switch');
-    if ($body.hasClass('dark-mode')) {
+    
+    // Verifica se o modo escuro está ativado ao carregar a página
+    var darkModeEnabled = localStorage.getItem('darkModeEnabled');
+    if (darkModeEnabled) {
+      $body.addClass('dark-mode');
       toggle.addClass('active');
-    } else {
-      toggle.removeClass('active');
     }
+    
     toggle.on('click', function (e) {
       e.preventDefault();
       $(this).toggleClass('active');
       $body.toggleClass('dark-mode');
+  
+      // Salva a preferência do usuário no localStorage
+      if ($body.hasClass('dark-mode')) {
+        localStorage.setItem('darkModeEnabled', true);
+      } else {
+        localStorage.removeItem('darkModeEnabled');
+      }
     });
   };
+  
 
   // Knob @v1.0
   NioApp.Knob = function (elm, opt) {
