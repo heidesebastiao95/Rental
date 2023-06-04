@@ -14,7 +14,7 @@ class ReservasController extends Controller
      */
     public function index()
     {
-        $clientes = User::all();
+        $clientes = User::where('role','cliente');
         $carros = Carro::where('estado','disponivel')->get();
         $reservas = Reserva::all();
         return view('painel.reservas.index',[

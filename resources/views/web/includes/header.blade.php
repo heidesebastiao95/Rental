@@ -25,6 +25,14 @@
                     <li><a href="{{ route('painel') }}" class="nav-link">Painel</a></li>
                   @endif
               @endauth
+              <li>
+                <form method="POST" action="{{ route('logout') }}" x-data>
+                  @csrf
+                  <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                    Log out
+                  </a>
+              </li>
+              </form>
             </ul>
           </nav>
         </div>

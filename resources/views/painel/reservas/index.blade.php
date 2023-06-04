@@ -133,13 +133,27 @@
                 <div class="form-group">
                     <label class="form-label">Carro</label>
                     <div class="form-control-wrap">
-                        <select name="carro_id" class="form-select js-select2" data-search="on">
+                        <select id="carro" name="carro_id" class="form-select js-select2" data-search="on">
                             @isset($carros)
                                 @foreach ($carros as $carro)
-                                <option value="{{ $carro->id }}">{{ $carro->marca }}</option>
+                                <option marca = "{{ $carro->marca }}" modelo = "{{ $carro->modelo }}" value="{{ $carro->id }}">{{ $carro->marca }}</option>
                                 @endforeach
                             @endisset
                         </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="product-title">Marca</label>
+                    <div class="form-control-wrap">
+                        <input type="text" class="form-control" id="carro-marca" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="product-title">Modelo</label>
+                    <div class="form-control-wrap">
+                        <input type="text" class="form-control" id="carro-modelo" readonly>
                     </div>
                 </div>
                 <div class="col-12">
@@ -159,4 +173,21 @@
         </div><!-- .nk-block -->
     </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectCarro = document.querySelector('#carro');
+            var inputMarca = document.querySelector('#carro-marca');
+            var inputModelo = document.querySelector('#carro-modelo');
+
+            selectCarro.onchange = function() {
+            var selectedOption = selectCarro.options[selectCarro.selectedIndex];
+            var marca = selectedOption.getAttribute('marca');
+            var modelo = selectedOption.getAttribute('modelo');
+
+            inputMarca.value = marca;
+            inputModelo.value = modelo;
+        };
+    });
+    </script>
 @endsection

@@ -1,5 +1,20 @@
+@php
+    switch ($carro->estado) {
+        case 'alugado':
+            $disable = 'disabled';
+            break;
+        case 'disponivel':
+            $disable = '';
+            break;
+        case 'reservado':
+            $disable = 'disabled';
+            break;
+        default:
+    }
+@endphp
+
 <div class="col-lg-8 mb-6 card pt-3">
-    <form action="{{ route('pagamento.store') }}" method="post">
+    <form action="{{ route('pagamento.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -53,13 +68,13 @@
             </div>
             <div class="col-md-6">
                 <label for="">Quantia</label>
-                <input name="quantia" type="text" class="form-control" value="{{ $carro->preco }}kz" disabled>
+                <input name="quantia" type="text" class="form-control" value="{{ $carro->preco/2 }}kz" disabled>
                 <input name="carro" type="hidden" class="form-control" value="{{ $carro->id }}">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6 mr-auto">
-                <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Arrendar">
+                <input type="submit" class="btn btn-block btn-primary {{ $disable }} text-white py-3 px-5" value="Arrendar" {{ $disable }}>
             </div>
         </div>
     </form>

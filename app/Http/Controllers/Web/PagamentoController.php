@@ -36,8 +36,8 @@ class PagamentoController extends Controller
             'anexo' => $nomeAnexo
         ]);
 
-        $reserva->update(['estado' => 'confirmada']);
-        Carro::where('id',$request->carro)->update(['estado'=> 'alugado']);
+        $reserva->update(['estado' => 'pendente']);
+        Carro::where('id',$request->carro)->update(['estado'=> 'reservado']);
 
 
         return redirect()->back();
