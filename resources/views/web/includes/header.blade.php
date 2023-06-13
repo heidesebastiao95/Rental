@@ -21,7 +21,7 @@
               <li class="{{ (Route::is('sobre'))? 'active':'' }}"><a href="{{ route('sobre') }}" class="nav-link">Sobre</a></li>
               <li class="{{ (Route::is('contacto'))? 'active':'' }}"><a href="{{ route('contacto') }}" class="nav-link">Contacto</a></li>
               @auth
-                  @if (Auth::user()->role == 'admin')
+                  @if (Auth::user()->role == 'admin' || Auth::user()->role == 'funcionario' )
                     <li><a href="{{ route('painel') }}" class="nav-link">Painel</a></li>
                   @endif
               @endauth
