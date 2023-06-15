@@ -15,7 +15,7 @@ class PainelController extends Controller
         $cleintesCount = User::where('role','cliente')->count();
         $reservasCount = Reserva::all()->count();
         $carrosCount = Carro::all()->count();
-        $pagamentos = Pagamento::where('estado','validado')->sum('reserva_id');
+        $pagamentos = Pagamento::where('estado','validado')->sum('quantia');
 
         return view('painel.home',[
             'clientes' => $cleintesCount,

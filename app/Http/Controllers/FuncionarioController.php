@@ -34,7 +34,7 @@ class FuncionarioController extends Controller
     {
         $validatedData = $request->validate([
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'nome' => 'required',
+            'nome' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\s\'-]+$/'],
             'email' => 'required|email',
             'sexo' => 'required',
             'bi' => 'required',
@@ -43,6 +43,7 @@ class FuncionarioController extends Controller
             'endereco' => 'required',
             'telefone' => 'required',
         ]);
+        
         
         if(!empty($request->file('foto')))
         {
@@ -108,6 +109,19 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $validatedData = $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nome' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\s\'-]+$/'],
+            'email' => 'required|email',
+            'sexo' => 'required',
+            'bi' => 'required',
+            'nascimento' => 'required|date',
+            'password' => 'required|min:8',
+            'endereco' => 'required',
+            'telefone' => 'required',
+        ]);
+        
         if(!empty($request->file('foto')))
         {
             $imagem = $request->file('foto');
